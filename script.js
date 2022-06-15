@@ -143,7 +143,7 @@ function downloadCanvas(size){
 }
 
 //Handle image upload
-const userFile = document.getElementById("userFile");
+var userFile = document.getElementById("userFile");
 var place = document.getElementById ("text");
 
 function handleFiles(){
@@ -267,7 +267,7 @@ document.getElementById("textcolor").addEventListener("change", function(){
     if(igors.text.botTxt.length != 0){
         setBttmTxt();
     }
-    if(igors.text.botTxt.length != 0){
+    if(igors.text.topTxt.length != 0){
         setTopTxt();
     }
 })
@@ -282,14 +282,14 @@ function drawBotTxt(canva, text, txtRatio){
     drawText(text, txtRatio, canva.width/2, canva.height*0.9, ctx, canva.width);
 }
 
-function setBttmTxt(){
+function setTopTxt(){
     txtctx.clearRect(0, 0, canw, canh/2);
     //blurctx.clearRect(0, 0, canw, canh/2);
     igors.text.topTxt = document.getElementById("toptext").value.toUpperCase();
     drawText(igors.text.topTxt, igors.text.txtRatio, canw/2, canh*0.15, txtctx, canw);
 }
 
-function setTopTxt(){
+function setBttmTxt(){
     txtctx.clearRect(0, canh/2, canw, canh/2);
     //blurctx.clearRect(0, canh/2, canw, canh/2);
     igors.text.botTxt = document.getElementById("bottomtext").value.toUpperCase();
@@ -297,9 +297,9 @@ function setTopTxt(){
 }
 
 document.getElementById("toptext").addEventListener("change", function(){
-    document.fonts.load("700 Work Sans").then(setBttmTxt());
+    document.fonts.load("700 Work Sans").then(setTopTxt());
 });
 
 document.getElementById("bottomtext").addEventListener("change", function(){
-    document.fonts.load("700 Work Sans").then(setTopTxt());
+    document.fonts.load("700 Work Sans").then(setBttmTxt());
 });

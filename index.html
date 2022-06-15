@@ -11,9 +11,9 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div>
-        <h1> Afirmāciju taisītājs</h1>
-        
+    <h1> Afirmāciju taisītājs</h1>
+    <div>    
+        <div id="lol"></div>
         <div id="result">
             <canvas id="image" class="creator"></canvas>
             <canvas id="border" class="creator"></canvas>
@@ -54,8 +54,9 @@
                 </div>
             </div>
             <div id="finalControls" class="section">
-                <button class="button" id="dumb" onclick="saveFile(1080)">Lejupielādēt</button>
-                <button class="button" id="dumb" onclick="clearAll()">Izdzēst</button>
+                <button class="button hidden" id="download" onclick="saveFile()">Lejupielādēt</button>
+                <button class="button " id="generate" onclick="generateFinal(1080)">Ģenerēt bildi</button>
+                <button class="button" id="delete" onclick="clearAll()">Izdzēst</button>
             </div>
         </div> 
     </div>

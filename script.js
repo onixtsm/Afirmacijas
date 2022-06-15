@@ -8,6 +8,7 @@ var canw = 0; var canh = 0;
 function ConstAfirmacija() {
     
     this.imgURL = "null";
+    this.finalURL = "null";
     this.text = {
         topTxt : "null",
         botTxt : "null",
@@ -66,7 +67,13 @@ function mergeCanvas(imageID, borderID, textID, textBlurID, ctx, size){
 
 //Construct canva from stored data
 
-function constructCanva(canva, size){
+function generateImage(size){
+    var anch = document.getElementById("finished");
+    var canva = document.createElement("canvas");
+    anch.appendChild(canva);
+    canva.id = "finalCopy";
+    canva.width = size;
+    canva.height = size;
 
     var ctx = canva.getContext("2d");
     img = new Image();
@@ -79,19 +86,34 @@ function constructCanva(canva, size){
         }
         if(igors.text.botTxt != "null" && igors.text.txtRatio != -1){
             drawBotTxt(canva, igors.text.botTxt, igors.text.txtRatio);
-        }
-        
-        //ctx.drawImage(document.getElementById("text"), 0, 0, size, size)
-
-        const temp = document.createElement("a");
-        temp.href = canva.toDataURL();
-        temp.download = "afirmacija";
-        temp.click();
-        temp.remove;
-        canva.remove();
+        } 
+        igors.finalURL = canva.toDataURL();
+        anch.remove();
     }
 }
 
+function generateFinal(size) {
+    generateImage(size);
+    document.getElementById("result").classList.toggle("hidden");
+    document.getElementById("inputFile").classList.toggle("hidden");
+    document.getElementById("colors").classList.toggle("hidden");
+    document.getElementById("addText").classList.toggle("hidden");
+    document.getElementById("download").classList.toggle("hidden");
+    document.getElementById("generate").classList.toggle("hidden");
+    document.getElementById("delete").classList.toggle("hidden");
+    var img = new Image();
+    img.src = igors.finalURL;
+    document.getElementById("lol").appendChild(img);
+}
+
+function downloadImage(){
+    const temp = document.createElement("a");
+    temp.href = igors.finalURL;
+    temp.download = "afirmacija";
+    temp.click();
+    temp.remove;
+    canva.remove();
+}
 
 //Show/Hide smth
 function showYourself(a){document.getElementsByClassName("banana")[a-1].classList.toggle("hidden");}
@@ -100,7 +122,7 @@ function showYourself(a){document.getElementsByClassName("banana")[a-1].classLis
 function changeType(a){document.getElementById(a).classList.toggle("bigBoi");}
 
 //Used to save image
-function saveFile(exportSize){downloadCanvas(exportSize);}
+function saveFile(exportSize){downloadImage();}
 
 //Clear canvas
 function clearCanvas(elem){
